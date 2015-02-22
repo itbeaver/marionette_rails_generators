@@ -1,5 +1,7 @@
 # MarionetteRailsGenerators
 
+[![Code Climate](https://codeclimate.com/github/itbeaver/marionette_rails_generators/badges/gpa.svg)](https://codeclimate.com/github/itbeaver/marionette_rails_generators)
+
 TODO: Write a gem description
 
 ## Installation
