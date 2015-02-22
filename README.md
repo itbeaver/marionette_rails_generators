@@ -23,7 +23,11 @@ To require libraries, add the following to your application.js:
 //= require underscore
 //= require backbone
 //= require backbone.marionette
+//= require backbone-syphon
+//= require jquery.spin
 ```
+
+If you don't need loading spinner - remove `//= require jquery.spin`
 
 ## Usage
 
