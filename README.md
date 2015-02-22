@@ -16,7 +16,8 @@ And then execute:
 
     $ bundle
 
-To require Backbone and Marionette libraries, add the following to your application.js:
+Backbone(1.1.2) and Marionette(2.3.2) are loaded from the gem 'backbone-rails' and gem 'marionette-rails' accordingly.
+To require libraries, add the following to your application.js:
 
 ```javascript
 //= require underscore
