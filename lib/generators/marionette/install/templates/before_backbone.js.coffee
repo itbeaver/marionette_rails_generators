@@ -1,0 +1,2 @@
+@onShowAllView = ->
+  false
