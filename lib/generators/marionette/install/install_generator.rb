@@ -78,6 +78,6 @@ class Marionette::InstallGenerator < Rails::Generators::Base
   end
 
   def generate_application_layout
-    generate 'marionette:layout', 'application'
+    generate 'marionette:view', 'layout', 'application'
   end
 end
