@@ -21,7 +21,7 @@ class Marionette::Controller::ViewGenerator < Rails::Generators::Base
     template 'app/controllers/controller.js.coffee',
              "#{javascript_path}/backbone/app/controllers/#{@title.underscore}_controller.js.coffee"
     @actions.each do |act|
-      generate 'marionette:view', 'item_view', act
+      generate 'marionette:view', 'item_view', act, @title
     end
   end
 end

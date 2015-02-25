@@ -13,20 +13,20 @@ class Marionette::ViewGenerator < Rails::Generators::Base
 
   argument :type, type: :string
   argument :title, type: :string
+  argument :module, type: :string, default: ''
 
   def generate_view
-    @title = title
     case type
     when 'layout'
       template 'app/views/layouts/layouts.js.coffee',
                "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee"
       template 'app/templates/layouts/application.jst.eco',
-               "#{javascript_path}/backbone/app/templates/layouts/#{title.underscore}.jst.eco"
+               "#{javascript_path}/backbone/app/templates/layouts/#{ @title.underscore }.jst.eco"
     when 'item_view'
       template 'app/views/item_view.js.coffee',
-               "#{javascript_path}/backbone/app/views/<%= title.underscore %>.js.coffee"
+               "#{javascript_path}/backbone/app/views/#{ @title.underscore }.js.coffee"
       template 'app/templates/item_view.jst.eco',
-               "#{javascript_path}/backbone/app/templates/#{title.underscore}.jst.eco"
+               "#{javascript_path}/backbone/app/templates/#{ @title.underscore }.jst.eco"
     else
       puts "That type didn't supported"
     end

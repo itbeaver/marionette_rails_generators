@@ -80,5 +80,9 @@ class Marionette::InstallGenerator < Rails::Generators::Base
   def generate_application_layout
     generate 'marionette:view', 'layout', 'application'
     generate 'marionette:controller:view', 'root', 'index'
+    inject_into_file "#{javascript_path}/backbone/routes.js.coffee", after: "console.log 'Hello world!'" do <<-'COFFEE'
+      new App.Controllers.Root(action: 'index')
+    COFFEE
+    end
   end
 end

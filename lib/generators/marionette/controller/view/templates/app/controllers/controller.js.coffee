@@ -6,7 +6,11 @@
       switch args.action
       <%- @actions.each do |a| -%>
         when '<%= a %>'
-          console.log '<%= a %> action is fired!'
+          @layout = new App.Views.ApplicationLayout
+          @listenTo @layout, "show", =>
+            <%= a %>View = new App.Views.<%= @title.capitalize %>.Index
+            @show indexView, region: @layout.bodyRegion
+          @show @layout
       <%- end -%>
         else
           console.log('Not found')
