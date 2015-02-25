@@ -18,8 +18,8 @@ class Marionette::ControllerGenerator < Rails::Generators::Base
                              desc: "Actions for the resource controller"
   class_option :with_views, type: :boolean, default: false,
                              desc: "Generate with views"
-
   def generate_view
+    @with_views = options[:with_views]
     if @with_views
       template 'app/controllers/controller_with_views.js.coffee',
                "#{javascript_path}/backbone/app/controllers/#{@title.underscore}_controller.js.coffee"
