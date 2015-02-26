@@ -1,0 +1,1 @@
+<p>Find me in app/templates/<%= @module.underscore %>/<%= @title.underscore %>.jst.eco</p>
