@@ -146,6 +146,14 @@
             <li>partial = false</li>
           </ul>
         </li>
+        <li>
+          <h2><code>rails g marionette:model ENTITY [title:string description:text]</code></h2>
+          <p>Creates [Entity] Entities.Model and [Entity]Collection Entities.Collection at <span class="filename">../backbone/app/models/[entity].js.coffee</span></p>
+          <p>Defaults:</p>
+          <ul>
+            <li>schema = {}</li>
+          </ul>
+        </li>
       </ol>
     </div>
   </div>

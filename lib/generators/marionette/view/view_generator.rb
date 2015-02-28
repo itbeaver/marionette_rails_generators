@@ -4,7 +4,7 @@ require 'generators/marionette/resource_helpers'
 #
 # Example:
 #
-#   rails g marionette:generate:layout application
+#   rails g marionette:view layout application
 class Marionette::ViewGenerator < Rails::Generators::Base
   include Marionette::ResourceHelpers
   desc 'Creates view: type can be: [layout, item_view]'
