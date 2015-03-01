@@ -79,7 +79,7 @@ class Marionette::InstallGenerator < Rails::Generators::Base
     generate 'marionette:controller root index --with-views'
     if File.exist? "#{javascript_path}/backbone/routes.js.coffee"
       inject_into_file "#{javascript_path}/backbone/routes.js.coffee", after: "console.log 'Hello world!'\n" do <<-'COFFEE'
-        new App.Controllers.Root(action: 'index')
+      new App.Controllers.Root(action: 'index')
       COFFEE
       end
     end

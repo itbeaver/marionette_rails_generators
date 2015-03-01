@@ -1,6 +1,11 @@
 describe 'Backbone', ->
-  it 'does something', ->
-    expect(1 + 1).toBe(2)
+  it 'app responds', ->
+    expect(Backbone.app).toBeDefined()
+  it 'layout view responds', ->
+    expect(Backbone.app.Views.ApplicationLayout).toBeDefined()
+  it 'root#index view responds', ->
+    expect(Backbone.app.Views.Root.Index).toBeDefined()
+
   # player = undefined
   # song = undefined
   # beforeEach ->
