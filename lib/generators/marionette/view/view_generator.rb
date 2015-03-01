@@ -18,16 +18,35 @@ class Marionette::ViewGenerator < Rails::Generators::Base
                              desc: 'Generate partial template'
   class_option 'with-view-class', type: :boolean, default: false,
                              desc: 'Generate view class when generating partial template? (use with --partial)'
-  def generate_view
+
+  def vars
     @partial = options[:partial]
     @partial_class = options['with-view-class']
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
+  end
+
+  def layout
+    @begin_layout = "@Backbone.app.module \"Views\", (Views, App, Backbone, Marionette, $, _) ->\n"
+    @layout = %(
+  class Views.#{@title.camelcase.gsub('::', '.')}Layout extends App.Views.Layout
+    template: 'layouts/#{@titletemplate.underscore}'
+    regions:
+      bodyRegion: "#body"
+)
+    @layout = @begin_layout + @layout
+  end
+
+
+  def generate_view
     case type
     when 'layout', 'Layout'
       if !@partial || @partial_class
-        template 'app/views/layouts/layouts.js.coffee',
-                 "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", append: true
+        if File.exist?("#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee")
+          append_file "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", @layout.gsub(@begin_layout, '')
+        else
+          create_file "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", @layout
+        end
       end
       template 'app/templates/layouts/application.jst.eco',
                "#{javascript_path}/backbone/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco"
