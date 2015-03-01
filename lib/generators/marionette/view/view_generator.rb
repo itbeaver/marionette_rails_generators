@@ -16,12 +16,12 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   argument :module, type: :string, default: 'All'
   class_option :partial, type: :boolean, default: false,
                              desc: 'Generate partial template'
-  class_option 'with-view-class', type: :boolean, default: false,
+  class_option 'with-class', type: :boolean, default: false,
                              desc: 'Generate view class when generating partial template? (use with --partial)'
 
   def vars
     @partial = options[:partial]
-    @partial_class = options['with-view-class']
+    @partial_class = options['with-class']
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
   end
