@@ -27,7 +27,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
     when 'layout', 'Layout'
       if !@partial || @partial_class
         template 'app/views/layouts/layouts.js.coffee',
-                 "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee"
+                 "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", append: true
       end
       template 'app/templates/layouts/application.jst.eco',
                "#{javascript_path}/backbone/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco"
