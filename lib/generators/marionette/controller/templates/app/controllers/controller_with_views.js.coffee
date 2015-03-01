@@ -1,6 +1,6 @@
 @Backbone.app.module "Controllers", (Controllers, App, Backbone, Marionette, $, _) ->
 
-  class Controllers.<%= @title.camelcase %> extends App.Controllers.Application
+  class Controllers.<%= @title.camelcase.gsub('::', '.') %> extends App.Controllers.Application
     initialize: (args={}) ->
       args.action = '' unless args.action
       switch args.action
@@ -8,7 +8,7 @@
         when '<%= a %>'
           @layout = new App.Views.ApplicationLayout
           @listenTo @layout, "show", =>
-            <%= a %>View = new App.Views.<%= @title.camelcase %>.Index
+            <%= a %>View = new App.Views.<%= @title.camelcase.gsub('::', '.') %>.Index
             @show <%= a %>View, region: @layout.bodyRegion
           @show @layout
       <%- end -%>

@@ -1,6 +1,6 @@
 @Backbone.app.module "Controllers", (Controllers, App, Backbone, Marionette, $, _) ->
 
-  class Controllers.<%= @title.camelcase %> extends App.Controllers.Application
+  class Controllers.<%= @title.camelcase.gsub('::', '.') %> extends App.Controllers.Application
     initialize: (args={}) ->
       args.action = '' unless args.action
       switch args.action
