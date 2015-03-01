@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require 'marionette_rails_generators'
+require 'jasmine'
 
 Bundler.require(*Rails.groups)
 
