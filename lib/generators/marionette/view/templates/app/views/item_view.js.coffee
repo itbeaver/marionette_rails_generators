@@ -1,4 +1,4 @@
-@Backbone.app.module "Views.<%= @module.capitalize %>", (<%= @module.capitalize %>, App, Backbone, Marionette, $, _) ->
+@Backbone.app.module "Views.<%= @module.camelcase %>", (<%= @module.camelcase %>, App, Backbone, Marionette, $, _) ->
 
-  class <%= @module.capitalize %>.<%= title.capitalize %> extends App.Views.ItemView
+  class <%= @module.camelcase %>.<%= title.camelcase %> extends App.Views.ItemView
     template: '<%= @module.underscore %>/<%= title.underscore %>'
