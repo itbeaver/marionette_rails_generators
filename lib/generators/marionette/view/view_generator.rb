@@ -16,19 +16,26 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   argument :module, type: :string, default: 'All'
   class_option :partial, type: :boolean, default: false,
                              desc: 'Generate partial template'
+  class_option 'with-view-class', type: :boolean, default: false,
+                             desc: 'Generate view class when generating partial template? (use with --partial)'
   def generate_view
     @partial = options[:partial]
+    @partial_class = options['with-view-class']
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
     case type
-    when 'layout'
-      template 'app/views/layouts/layouts.js.coffee',
-               "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee"
+    when 'layout', 'Layout'
+      if !@partial || @partial_class
+        template 'app/views/layouts/layouts.js.coffee',
+                 "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee"
+      end
       template 'app/templates/layouts/application.jst.eco',
                "#{javascript_path}/backbone/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco"
-    when 'item_view'
-      template 'app/views/item_view.js.coffee',
-               "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+    when 'item_view', 'ItemView'
+      if !@partial || @partial_class
+        template 'app/views/item_view.js.coffee',
+                 "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+      end
       template 'app/templates/item_view.jst.eco',
                "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
     else
