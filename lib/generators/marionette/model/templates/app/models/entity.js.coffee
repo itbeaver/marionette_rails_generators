@@ -1,6 +1,6 @@
 @Backbone.app.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  class Entities.<%= @title.capitalize %> extends App.Entities.Model
+  class Entities.<%= @title.camelcase %> extends App.Entities.Model
     urlRoot: -> '/api/<%= @title.underscore %>'
     schema:
       {
@@ -9,6 +9,6 @@
       <%- end -%>
       }
 
-  class Entities.<%= @title.capitalize %>Collection extends App.Entities.Collection
-    model: Entities.<%= @title.capitalize %>
+  class Entities.<%= @title.camelcase %>Collection extends App.Entities.Collection
+    model: Entities.<%= @title.camelcase %>
     url: -> '/api/<%= @title.underscore %>'
