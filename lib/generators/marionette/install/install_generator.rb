@@ -11,27 +11,30 @@ class Marionette::InstallGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   def append_vendor_dependencies
-    %w{jquery.spin underscore backbone backbone.marionette backbone-syphon}.each do |lib|
-      inject_into_file "#{javascript_path}/application.js", before: "\n//= require_tree ." do %(
-\n//= require #{lib}
-      )
-      end
+    inject_into_file "#{javascript_path}/application.js", before: "//= require_tree ." do %(
+//= require jquery.spin
+//= require underscore
+//= require backbone
+//= require backbone.marionette
+//= require backbone-syphon
+
+)
     end
   end
 
   def append_app_files
     inject_into_file "#{javascript_path}/application.js", before: "\n//= require_tree ." do %(
-\n//= require ./backbone/before_backbone\n
-//= require ./backbone/app\n
-//= require_tree ./backbone/base\n
-//= require_tree ./backbone/config\n
-//= require_tree ./backbone/app/templates\n
-//= require_tree ./backbone/app/views\n
-//= require_tree ./backbone/app/models\n
-//= require_tree ./backbone/app/controllers\n
-//= require ./backbone/routes\n
-//= require ./backbone/after_backbone\n
-    )
+//= require ./backbone/before_backbone
+//= require ./backbone/app
+//= require_tree ./backbone/base
+//= require_tree ./backbone/config
+//= require_tree ./backbone/app/templates
+//= require_tree ./backbone/app/views
+//= require_tree ./backbone/app/models
+//= require_tree ./backbone/app/controllers
+//= require ./backbone/routes
+//= require ./backbone/after_backbone
+)
     end
   end
 
