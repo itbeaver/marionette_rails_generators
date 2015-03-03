@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "eco"
 
   spec.add_development_dependency "rails"
+  spec.add_development_dependency "jasmine"
   spec.add_development_dependency "jquery-rails"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "bundler", "~> 1.7"

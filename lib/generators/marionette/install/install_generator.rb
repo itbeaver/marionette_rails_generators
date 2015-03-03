@@ -10,34 +10,31 @@ class Marionette::InstallGenerator < Rails::Generators::Base
 
   source_root File.expand_path('../templates', __FILE__)
 
-  def remove_unused_js
-    if yes? "Remove turbolinks and requiring tree from application.js? (y)"
-      gsub_file "#{javascript_path}/application.js", "//= require turbolink\n", ''
-      gsub_file "#{javascript_path}/application.js", "//= require_tree .\n", ''
-      gsub_file 'app/views/layouts/application.html.erb', ", 'data-turbolinks-track' => true", ''
-    end
-  end
-
   def append_vendor_dependencies
-    %w{jquery.spin underscore backbone backbone.marionette backbone-syphon}.each do |lib|
-      append_to_file "#{javascript_path}/application.js" do
-        "\n//= require #{lib}"
-      end
+    inject_into_file "#{javascript_path}/application.js", before: "//= require_tree ." do %(
+//= require jquery.spin
+//= require underscore
+//= require backbone
+//= require backbone.marionette
+//= require backbone-syphon
+
+)
     end
   end
 
   def append_app_files
-    append_to_file "#{javascript_path}/application.js" do
-      "\n//= require ./backbone/before_backbone\n" \
-        "//= require ./backbone/app\n" \
-        "//= require_tree ./backbone/base\n" \
-        "//= require_tree ./backbone/config\n" \
-        "//= require_tree ./backbone/app/templates\n" \
-        "//= require_tree ./backbone/app/views\n" \
-        "//= require_tree ./backbone/app/models\n" \
-        "//= require_tree ./backbone/app/controllers\n" \
-        "//= require ./backbone/routes\n" \
-        "//= require ./backbone/after_backbone\n"
+    inject_into_file "#{javascript_path}/application.js", before: "\n//= require_tree ." do %(
+//= require ./backbone/before_backbone
+//= require ./backbone/app
+//= require_tree ./backbone/base
+//= require_tree ./backbone/config
+//= require_tree ./backbone/app/templates
+//= require_tree ./backbone/app/views
+//= require_tree ./backbone/app/models
+//= require_tree ./backbone/app/controllers
+//= require ./backbone/routes
+//= require ./backbone/after_backbone
+)
     end
   end
 
@@ -80,9 +77,11 @@ class Marionette::InstallGenerator < Rails::Generators::Base
   def generate_application_layout
     generate 'marionette:view', 'layout', 'application'
     generate 'marionette:controller root index --with-views'
-    inject_into_file "#{javascript_path}/backbone/routes.js.coffee", after: "console.log 'Hello world!'\n" do <<-'COFFEE'
+    if File.exist? "#{javascript_path}/backbone/routes.js.coffee"
+      inject_into_file "#{javascript_path}/backbone/routes.js.coffee", after: "console.log 'Hello world!'\n" do <<-'COFFEE'
       new App.Controllers.Root(action: 'index')
-    COFFEE
+      COFFEE
+      end
     end
     template 'app/templates/index.jst.eco', "#{javascript_path}/backbone/app/templates/root/index.jst.eco", force: true
   end
