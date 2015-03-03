@@ -20,6 +20,8 @@ Jasmine.configure do |config|
   config.show_console_log = true
 end
 
+puts 'To skip installation pass env var to rails g marionette:install PASS_INSTALL=true'
+
 unless ENV["PASS_INSTALL"]
   system('bundle exec rails d marionette:install') if File.exist? 'app/assets/javascripts/backbone/app.js.coffee'
   system('bundle exec rails g marionette:install')
