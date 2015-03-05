@@ -129,7 +129,7 @@
           </ul>
         </li>
         <li>
-          <h2><code>rails g marionette:view TYPE TITLE MODULE --partial</code></h2>
+          <h2><code>rails g marionette:view TITLE TYPE --partial</code></h2>
           <p>Creates [Module].[Title] [Type] at <span class="filename">../backbone/app/views/[module]/[title].js.coffee</span></p>
           <p>Creates JST template at <span class="filename">../backbone/app/views/[module]/[title].js.coffee</span></p>
           <p>If [Type] is 'Layout', module will be 'layouts' and can't be changed</p>
