@@ -23,6 +23,10 @@ end
 puts 'To skip installation pass env var to rails g marionette:install PASS_INSTALL=true'
 
 unless ENV["PASS_INSTALL"]
-  system('bundle exec rails d marionette:install') if File.exist? 'app/assets/javascripts/backbone/app.js.coffee'
+  if File.exist? 'app/assets/javascripts/backbone/app.js.coffee'
+    puts 'Running: bundle exec rails d marionette:install'
+    system('bundle exec rails d marionette:install')
+  end
+  puts 'Running: bundle exec rails g marionette:install'
   system('bundle exec rails g marionette:install')
 end
