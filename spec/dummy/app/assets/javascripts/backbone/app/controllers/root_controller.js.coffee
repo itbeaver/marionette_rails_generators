@@ -1,6 +1,6 @@
-@Backbone.app.module "Controllers", (Controllers, App, Backbone, Marionette, $, _) ->
+@Backbone.app.module "Controllers.All", (All, App, Backbone, Marionette, $, _) ->
 
-  class Controllers.Root extends App.Controllers.Application
+  class All.Root extends App.Controllers.Application
     initialize: (args={}) ->
       args.action = '' unless args.action
       switch args.action

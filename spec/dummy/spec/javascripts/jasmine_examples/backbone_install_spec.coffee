@@ -26,9 +26,9 @@ describe 'Backbone app after install', ->
     expect(indexView).toEqual(jasmine.any(Backbone.app.Views.Root.Index))
 
   it 'root controller responds', ->
-    expect(Backbone.app.Controllers.Root).toBeDefined()
-    controller = new Backbone.app.Controllers.Root
-    expect(controller).toEqual(jasmine.any(Backbone.app.Controllers.Root))
+    expect(Backbone.app.Controllers.All.Root).toBeDefined()
+    controller = new Backbone.app.Controllers.All.Root
+    expect(controller).toEqual(jasmine.any(Backbone.app.Controllers.All.Root))
 
   describe 'Base', ->
     describe 'controllers', ->
