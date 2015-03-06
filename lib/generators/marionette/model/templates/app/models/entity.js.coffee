@@ -1,6 +1,6 @@
-@Backbone.app.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
+@Backbone.app.module "Entities.<%= @module.camelcase.gsub('::', '.') %>", (<%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>, App, Backbone, Marionette, $, _) ->
 
-  class Entities.<%= @title.camelcase.gsub('::', '.') %> extends App.Entities.Model
+  class <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase %> extends App.Entities.Model
     urlRoot: -> '/api/<%= @title.underscore %>'
     schema:
       {
@@ -9,6 +9,6 @@
       <%- end -%>
       }
 
-  class Entities.<%= @title.camelcase.gsub('::', '.') %>Collection extends App.Entities.Collection
-    model: Entities.<%= @title.camelcase.gsub('::', '.') %>
+  class <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase %>Collection extends App.Entities.Collection
+    model: <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase %>
     url: -> '/api/<%= @title.underscore %>'
