@@ -7,8 +7,8 @@
   API =
     root: ->
       console.log 'Hello world!'
-      new App.Controllers.Root(action: 'index')
+      new App.Controllers.All.Root(action: 'index')
 
   App.addInitializer ->
-    new Router
+    Backbone.app.router = new Router
       controller: API

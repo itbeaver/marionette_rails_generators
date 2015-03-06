@@ -18,13 +18,23 @@ class Marionette::ControllerGenerator < Rails::Generators::Base
                              desc: "Actions for the resource controller"
   class_option :with_views, type: :boolean, default: false,
                              desc: "Generate with views"
+
+  def vars
+    @module = 'All'
+    if @title =~ /\//
+      parse = @title.match /(.*)\/(.*)/
+      @title = parse[2]
+      @module = parse[1]
+    end
+  end
+
   def generate_view
     @with_views = options[:with_views]
     if @with_views
       template 'app/controllers/controller_with_views.js.coffee',
                "#{javascript_path}/backbone/app/controllers/#{@title.underscore}_controller.js.coffee"
       @actions.each do |act|
-        generate 'marionette:view', 'item_view', act, @title
+        generate 'marionette:view', "#{@title}/#{act}", 'ItemView'
       end
     else
       template 'app/controllers/controller.js.coffee',

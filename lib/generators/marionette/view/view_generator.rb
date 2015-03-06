@@ -7,19 +7,37 @@ require 'generators/marionette/resource_helpers'
 #   rails g marionette:view layout application
 class Marionette::ViewGenerator < Rails::Generators::Base
   include Marionette::ResourceHelpers
-  desc 'Creates view: type can be: [layout, item_view]'
+  desc %(
+    Creates view. Type values: [Layout, ItemView].
+    Module will be parsed from title
+
+    Example:
+
+      rails g marionette:view index ItemView title:string description:text
+        View => 'Backbone.app.Views.All.Index'
+      rails g marionette:view posts/index ItemView title:string description:text
+        View => 'Backbone.app.Views.Posts.Index'
+      rails g marionette:view blogs/posts/index ItemView title:string description:text
+        View => 'Backbone.app.Views.Blogs.Posts.Index'
+  )
 
   source_root File.expand_path('../templates', __FILE__)
 
-  argument :type, type: :string
   argument :title, type: :string
-  argument :module, type: :string, default: 'All'
+  argument :type, type: :string
+  argument :schema, type: :hash, default: {}, banner: 'title:string description:text'
   class_option :partial, type: :boolean, default: false,
                              desc: 'Generate partial template'
   class_option 'with-class', type: :boolean, default: false,
                              desc: 'Generate view class when generating partial template? (use with --partial)'
 
   def vars
+    @module = 'All'
+    if @title =~ /\//
+      parse = @title.match /(.*)\/(.*)/
+      @title = parse[2]
+      @module = parse[1]
+    end
     @partial = options[:partial]
     @partial_class = options['with-class']
     @titletemplate = @title
@@ -29,7 +47,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   def layout
     @begin_layout = "@Backbone.app.module \"Views\", (Views, App, Backbone, Marionette, $, _) ->\n"
     @layout = %(
-  class Views.#{@title.camelcase.gsub('::', '.')}Layout extends App.Views.Layout
+  class Views.#{@title.camelcase}Layout extends App.Views.Layout
     template: 'layouts/#{@titletemplate.underscore}'
     regions:
       bodyRegion: "#body"
