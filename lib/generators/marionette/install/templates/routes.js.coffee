@@ -9,5 +9,5 @@
       console.log 'Hello world!'
 
   App.addInitializer ->
-    new Router
+    Backbone.app.router = new Router
       controller: API

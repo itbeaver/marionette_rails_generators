@@ -10,5 +10,5 @@
       new App.Controllers.Root(action: 'index')
 
   App.addInitializer ->
-    new Router
+    Backbone.app.router = new Router
       controller: API
