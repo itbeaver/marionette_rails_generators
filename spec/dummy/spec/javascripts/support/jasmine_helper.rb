@@ -30,16 +30,16 @@ unless ENV["PASS_INSTALL"]
   system("rails g marionette:view TestLayout2 Layout")
   system("rails g marionette:view TestLayout3 Layout")
 
-  system("rails g marionette:view TestItemView1 ItemView title:string description:text url:text phone:string quantity:integer float_number:float decimal_number:decimal full:boolean email:string password:string")
-  system("rails g marionette:view TestItemView2 ItemView")
-  system("rails g marionette:view test_module/TestItemView3 ItemView")
-  system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/testItemView4 ItemView")
+  # system("rails g marionette:view TestItemView1 ItemView title:string description:text url:text phone:string quantity:integer float_number:float decimal_number:decimal full:boolean email:string password:string")
+  # system("rails g marionette:view TestItemView2 ItemView")
+  # system("rails g marionette:view test_module/TestItemView3 ItemView")
+  # system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/testItemView4 ItemView")
 
-  system("rails g marionette:view TestCollectionView1 CollectionView")
-  system("rails g marionette:view admin/TestCollectionView2 CollectionView")
-  system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/TestCollectionView3 CollectionView")
+  # system("rails g marionette:view TestCollectionView1 CollectionView")
+  # system("rails g marionette:view admin/TestCollectionView2 CollectionView")
+  # system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/TestCollectionView3 CollectionView")
 
-  system("rails g marionette:view TestCompositeView1 CompositeView")
-  system("rails g marionette:view test_module/TestCompositeView2 CompositeView")
-  system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/testCompositeView3 CompositeView")
+  # system("rails g marionette:view TestCompositeView1 CompositeView")
+  # system("rails g marionette:view test_module/TestCompositeView2 CompositeView")
+  # system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/testCompositeView3 CompositeView")
 end
