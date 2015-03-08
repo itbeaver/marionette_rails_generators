@@ -2,8 +2,8 @@
 #
 #   Layout
 #   'rails g marionette:view TestLayout1 Layout'
-#   'rails g marionette:view admin/TestLayout2 Layout'
-#   'rails g marionette:view TestSubsubmodule/test_submodule/TestModule/TestLayout3 Layout'
+#   'rails g marionette:view TestLayout2 Layout'
+#   'rails g marionette:view TestLayout3 Layout'
 #
 #   ItemView
 #   'rails g marionette:view TestItemView1 ItemView title:string description:text url:text phone:string quantity:integer float_number:float decimal_number:decimal full:boolean email:string password:string'
@@ -24,9 +24,11 @@
 
 describe 'Backbone view after generate', ->
   it 'Layout responds', ->
-    expect(Backbone.app.Views.Layouts.TestLayout1).toBeDefined()
-    expect(Backbone.app.Views.Layouts.Admin.TestLayout2).toBeDefined()
-    expect(Backbone.app.Views.Layouts.TestSubsubmodule.TestSubmodule.TestModule.TestLayout3).toBeDefined()
+    expect(Backbone.app.Views.Layouts.TestLayout1Layout).toBeDefined()
+    expect(Backbone.app.Views.Layouts.TestLayout2Layout).toBeDefined()
+    expect(Backbone.app.Views.Layouts.TestLayout3Layout).toBeDefined()
+    # expect(Backbone.app.Views.Layouts.Admin.TestLayout2).toBeDefined()
+    # expect(Backbone.app.Views.Layouts.TestSubsubmodule.TestSubmodule.TestModule.TestLayout3).toBeDefined()
   xit 'ItemView responds', ->
   xit 'CollectionView responds', ->
   xit 'CompositeView responds', ->

@@ -27,8 +27,8 @@ unless ENV["PASS_INSTALL"]
   system('bundle exec rails g marionette:install')
 
   system("rails g marionette:view TestLayout1 Layout")
-  system("rails g marionette:view admin/TestLayout2 Layout")
-  system("rails g marionette:view TestSubsubmodule/test_submodule/TestModule/TestLayout3 Layout")
+  system("rails g marionette:view TestLayout2 Layout")
+  system("rails g marionette:view TestLayout3 Layout")
 
   system("rails g marionette:view TestItemView1 ItemView title:string description:text url:text phone:string quantity:integer float_number:float decimal_number:decimal full:boolean email:string password:string")
   system("rails g marionette:view TestItemView2 ItemView")
