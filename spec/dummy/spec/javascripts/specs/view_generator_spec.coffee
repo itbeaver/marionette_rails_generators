@@ -23,3 +23,10 @@
 #
 
 describe 'Backbone view after generate', ->
+  it 'Layout responds', ->
+    expect(Backbone.app.Views.Layouts.TestLayout1).toBeDefined()
+    expect(Backbone.app.Views.Layouts.Admin.TestLayout2).toBeDefined()
+    expect(Backbone.app.Views.Layouts.TestSubsubmodule.TestSubmodule.TestModule.TestLayout3).toBeDefined()
+  xit 'ItemView responds', ->
+  xit 'CollectionView responds', ->
+  xit 'CompositeView responds', ->
