@@ -34,11 +34,11 @@ describe 'Backbone view after generate', ->
     expect(Backbone.app.Views.All.TestItemView2).toBeDefined()
     expect(Backbone.app.Views.TestModule.TestItemView3).toBeDefined()
     expect(Backbone.app.Views.TestSubsubmodule.TestSubmodule.TestModule.TestItemView4).toBeDefined()
-  xit 'CollectionView responds', ->
+  it 'CollectionView responds', ->
     expect(Backbone.app.Views.All.TestCollectionView1).toBeDefined()
     expect(Backbone.app.Views.Admin.TestCollectionView2).toBeDefined()
     expect(Backbone.app.Views.TestSubsubmodule.TestSubmodule.TestModule.TestCollectionView3).toBeDefined()
-  xit 'CompositeView responds', ->
+  it 'CompositeView responds', ->
     expect(Backbone.app.Views.All.TestCompositeView1).toBeDefined()
     expect(Backbone.app.Views.TestModule.TestCompositeView2).toBeDefined()
     expect(Backbone.app.Views.TestSubsubmodule.TestSubmodule.TestModule.TestCompositeView3).toBeDefined()

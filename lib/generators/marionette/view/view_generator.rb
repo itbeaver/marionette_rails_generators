@@ -8,7 +8,7 @@ require 'generators/marionette/resource_helpers'
 class Marionette::ViewGenerator < Rails::Generators::Base
   include Marionette::ResourceHelpers
   desc %(
-    Creates view. Type values: [Layout, ItemView].
+    Creates view. Type values: [partial, Layout, ItemView, CollectionView, CompositeView].
     Module will be parsed from title
 
     Example:
@@ -70,6 +70,20 @@ class Marionette::ViewGenerator < Rails::Generators::Base
                  "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
       end
       template 'app/templates/item_view.jst.eco',
+               "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
+    when 'collection_view', 'CollectionView'
+      unless @partial
+        template 'app/views/collection_view.js.coffee',
+                 "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+      end
+      template 'app/templates/collection_view.jst.eco',
+               "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
+    when 'composite_view', 'CompositeView'
+      unless @partial
+        template 'app/views/composite_view.js.coffee',
+                 "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+      end
+      template 'app/templates/composite_view.jst.eco',
                "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
     else
       puts "Type [#{type}] didn't supported. Feel free to submit issue https://github.com/itbeaver/marionette_rails_generators/issues"
