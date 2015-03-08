@@ -1,6 +1,6 @@
-@Backbone.app.module "Entities.<%= @module.camelcase.gsub('::', '.') %>", (<%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>, App, Backbone, Marionette, $, _) ->
+@Backbone.app.module "Entities.<%= @module.split('/').map{ |v| v.camelcase }.join('.') %>", (<%= @module.split('/').map{ |v| v.camelcase }.last.to_s %>, App, Backbone, Marionette, $, _) ->
 
-  class <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase %> extends App.Entities.Model
+  class <%= @module.split('/').map{ |v| v.camelcase }.last.to_s %>.<%= @title.camelcase %> extends App.Entities.Model
     urlRoot: -> '/api/<%= @title.underscore %>'
     schema:
       {
@@ -9,6 +9,6 @@
       <%- end -%>
       }
 
-  class <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase %>Collection extends App.Entities.Collection
-    model: <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase %>
+  class <%= @module.split('/').map{ |v| v.camelcase }.last.to_s %>.<%= @title.camelcase %>Collection extends App.Entities.Collection
+    model: <%= @module.split('/').map{ |v| v.camelcase }.last.to_s %>.<%= @title.camelcase %>
     url: -> '/api/<%= @title.underscore %>'

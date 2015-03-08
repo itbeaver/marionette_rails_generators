@@ -41,26 +41,15 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   end
 
   def layout
-    # if @module == 'All'
-      @begin_layout = "@Backbone.app.module \"Views.Layouts\", (Layouts, App, Backbone, Marionette, $, _) ->\n"
-      @layout = %(
+    @begin_layout = "@Backbone.app.module \"Views.Layouts\", (Layouts, App, Backbone, Marionette, $, _) ->\n"
+    @layout = %(
   class Layouts.#{@title.camelcase}Layout extends App.Views.Layout
     template: 'layouts/#{@titletemplate.underscore}'
     regions:
       bodyRegion: "#body"
 )
-#     else
-#       @begin_layout = "@Backbone.app.module \"Views.Layouts.#{@module.camelcase.gsub('::', '.')}\", (#{@module.camelcase.gsub('::', '.').split('.').last.to_s}, App, Backbone, Marionette, $, _) ->\n"
-#       @layout = %(
-#   class #{@module.camelcase.gsub('::', '.').split('.').last.to_s}.#{@title.camelcase}Layout extends App.Views.Layout
-#     template: 'layouts/#{@titletemplate.underscore}'
-#     regions:
-#       bodyRegion: "#body"
-# )
-#     end
     @layout = @begin_layout + @layout
   end
-
 
   def generate_view
     case type
