@@ -6,7 +6,7 @@
       switch args.action
       <%- @actions.each do |a| -%>
         when '<%= a %>'
-          @layout = new App.Views.ApplicationLayout
+          @layout = new App.Views.Layouts.ApplicationLayout
           @listenTo @layout, "show", =>
             <%= a %>View = new App.Views.<%= @title.camelcase %>.Index
             @show <%= a %>View, region: @layout.bodyRegion

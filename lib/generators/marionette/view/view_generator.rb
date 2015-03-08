@@ -28,9 +28,6 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   argument :schema, type: :hash, default: {}, banner: 'title:string description:text'
   class_option :partial, type: :boolean, default: false,
                              desc: 'Generate partial template'
-  class_option 'with-class', type: :boolean, default: false,
-                             desc: 'Generate view class when generating partial template? (use with --partial)'
-
   def vars
     @module = 'All'
     if @title =~ /\//
@@ -39,19 +36,28 @@ class Marionette::ViewGenerator < Rails::Generators::Base
       @module = parse[1]
     end
     @partial = options[:partial]
-    @partial_class = options['with-class']
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
   end
 
   def layout
-    @begin_layout = "@Backbone.app.module \"Views\", (Views, App, Backbone, Marionette, $, _) ->\n"
-    @layout = %(
-  class Views.#{@title.camelcase}Layout extends App.Views.Layout
+    if @module == 'All'
+      @begin_layout = "@Backbone.app.module \"Views.Layouts\", (Layouts, App, Backbone, Marionette, $, _) ->\n"
+      @layout = %(
+  class Layouts.#{@title.camelcase}Layout extends App.Views.Layout
     template: 'layouts/#{@titletemplate.underscore}'
     regions:
       bodyRegion: "#body"
 )
+    else
+      @begin_layout = "@Backbone.app.module \"Views.Layouts.#{@module.camelcase.gsub('::', '.')}\", (#{@module.camelcase.gsub('::', '.').split('.').last.to_s}, App, Backbone, Marionette, $, _) ->\n"
+      @layout = %(
+  class #{@module.camelcase.gsub('::', '.').split('.').last.to_s}.#{@title.camelcase}Layout extends App.Views.Layout
+    template: 'layouts/#{@titletemplate.underscore}'
+    regions:
+      bodyRegion: "#body"
+)
+    end
     @layout = @begin_layout + @layout
   end
 
@@ -59,7 +65,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   def generate_view
     case type
     when 'layout', 'Layout'
-      if !@partial || @partial_class
+      unless @partial
         if File.exist?("#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee")
           append_file "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", @layout.gsub(@begin_layout, '')
         else
@@ -68,8 +74,9 @@ class Marionette::ViewGenerator < Rails::Generators::Base
       end
       template 'app/templates/layouts/application.jst.eco',
                "#{javascript_path}/backbone/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco"
-    when 'item_view', 'ItemView'
-      if !@partial || @partial_class
+    when 'item_view', 'ItemView', 'partial'
+      @partial = true if type == 'partial'
+      unless @partial
         template 'app/views/item_view.js.coffee',
                  "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
       end
