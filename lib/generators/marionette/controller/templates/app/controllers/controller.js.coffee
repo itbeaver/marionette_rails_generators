@@ -1,6 +1,6 @@
-@Backbone.app.module "Controllers.<%= @module.camelcase.gsub('::', '.') %>", (<%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>, App, Backbone, Marionette, $, _) ->
+@Backbone.app.module "Controllers.<%= @module.split('/').map{ |v| v.camelcase }.join('.') %>", (<%= @module.split('/').map{ |v| v.camelcase }.last.to_s %>, App, Backbone, Marionette, $, _) ->
 
-  class <%= @module.camelcase.gsub('::', '.').split('.').last.to_s %>.<%= @title.camelcase.gsub('::', '.') %> extends App.Controllers.Application
+  class <%= @module.split('/').map{ |v| v.camelcase }.last.to_s %>.<%= @title.camelcase %> extends App.Controllers.Application
     initialize: (args={}) ->
       args.action = '' unless args.action
       switch args.action

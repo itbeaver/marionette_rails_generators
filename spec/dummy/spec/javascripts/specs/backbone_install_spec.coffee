@@ -1,3 +1,5 @@
+# assuming, that 'rails g marionette:install' is called before running spec
+
 describe 'Backbone app after install', ->
   describe 'vendor', ->
     it 'Backbone responds', ->
@@ -16,9 +18,9 @@ describe 'Backbone app after install', ->
     expect(Backbone.app.Router).toBeDefined()
 
   it 'main layout responds', ->
-    expect(Backbone.app.Views.ApplicationLayout).toBeDefined()
-    layout = new Backbone.app.Views.ApplicationLayout
-    expect(layout).toEqual(jasmine.any(Backbone.app.Views.ApplicationLayout))
+    expect(Backbone.app.Views.Layouts.ApplicationLayout).toBeDefined()
+    layout = new Backbone.app.Views.Layouts.ApplicationLayout
+    expect(layout).toEqual(jasmine.any(Backbone.app.Views.Layouts.ApplicationLayout))
 
   it 'root#index view responds', ->
     expect(Backbone.app.Views.Root.Index).toBeDefined()
