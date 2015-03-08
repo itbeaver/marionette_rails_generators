@@ -20,7 +20,7 @@ Jasmine.configure do |config|
   config.show_console_log = true
 end
 
-puts 'To skip installation pass env var to rails g marionette:install PASS_INSTALL=true'
+puts 'To skip installation pass rake jasmine PASS_INSTALL=true'
 
 unless ENV["PASS_INSTALL"]
   system('bundle exec rails g marionette:install')
