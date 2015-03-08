@@ -1,3 +1,5 @@
+# assuming, that 'rails g marionette:install' is called before running spec
+
 describe 'Backbone app after install', ->
   describe 'vendor', ->
     it 'Backbone responds', ->
