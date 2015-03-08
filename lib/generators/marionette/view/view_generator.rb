@@ -41,7 +41,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   end
 
   def layout
-    if @module == 'All'
+    # if @module == 'All'
       @begin_layout = "@Backbone.app.module \"Views.Layouts\", (Layouts, App, Backbone, Marionette, $, _) ->\n"
       @layout = %(
   class Layouts.#{@title.camelcase}Layout extends App.Views.Layout
@@ -49,15 +49,15 @@ class Marionette::ViewGenerator < Rails::Generators::Base
     regions:
       bodyRegion: "#body"
 )
-    else
-      @begin_layout = "@Backbone.app.module \"Views.Layouts.#{@module.camelcase.gsub('::', '.')}\", (#{@module.camelcase.gsub('::', '.').split('.').last.to_s}, App, Backbone, Marionette, $, _) ->\n"
-      @layout = %(
-  class #{@module.camelcase.gsub('::', '.').split('.').last.to_s}.#{@title.camelcase}Layout extends App.Views.Layout
-    template: 'layouts/#{@titletemplate.underscore}'
-    regions:
-      bodyRegion: "#body"
-)
-    end
+#     else
+#       @begin_layout = "@Backbone.app.module \"Views.Layouts.#{@module.camelcase.gsub('::', '.')}\", (#{@module.camelcase.gsub('::', '.').split('.').last.to_s}, App, Backbone, Marionette, $, _) ->\n"
+#       @layout = %(
+#   class #{@module.camelcase.gsub('::', '.').split('.').last.to_s}.#{@title.camelcase}Layout extends App.Views.Layout
+#     template: 'layouts/#{@titletemplate.underscore}'
+#     regions:
+#       bodyRegion: "#body"
+# )
+#     end
     @layout = @begin_layout + @layout
   end
 
@@ -83,7 +83,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
       template 'app/templates/item_view.jst.eco',
                "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
     else
-      puts "That type didn't supported. Feel free to submit issue https://github.com/itbeaver/marionette_rails_generators/issues"
+      puts "Type [#{type}] didn't supported. Feel free to submit issue https://github.com/itbeaver/marionette_rails_generators/issues"
     end
   end
 end
