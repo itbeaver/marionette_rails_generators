@@ -23,6 +23,7 @@ end
 puts 'To skip installation pass rake jasmine PASS_INSTALL=true'
 
 unless ENV["PASS_INSTALL"]
+  system('bundle exec rails d marionette:install')
   system('bundle exec rails g marionette:install')
 
   system("rails g marionette:view TestLayout1 Layout")
