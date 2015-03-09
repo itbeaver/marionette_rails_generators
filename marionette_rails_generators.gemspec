@@ -20,9 +20,11 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'backbone-rails', '~> 1.1.2'
   spec.add_runtime_dependency 'marionette-rails', '~> 2.3.2'
-  spec.add_runtime_dependency "eco"
+  spec.add_runtime_dependency 'eco'
 
   spec.add_development_dependency "rails"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency "pry-nav"
   spec.add_development_dependency "jasmine"
   spec.add_development_dependency "jquery-rails"
   spec.add_development_dependency "sqlite3"
