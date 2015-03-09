@@ -62,6 +62,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
             concat '<br>'.html_safe
             concat "\n"
             concat password_field_tag :password
+            concat "\n\n"
             concat label_tag :password_confirmation
             concat '<br>'.html_safe
             concat "\n"

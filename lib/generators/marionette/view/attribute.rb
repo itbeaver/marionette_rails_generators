@@ -9,7 +9,7 @@ class Marionette::Attribute < Rails::Generators::Base
   end
 
   def password_digest?
-    column_name == 'password' && type == :digest
+    @column_name == 'password' && @type == 'digest'
   end
 
   def field_type
