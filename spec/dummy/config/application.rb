@@ -3,6 +3,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'marionette_rails_generators'
 require 'jasmine'
+require 'pry'
+require 'pry-nav'
 
 Bundler.require(*Rails.groups)
 
