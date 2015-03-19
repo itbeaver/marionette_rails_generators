@@ -1,0 +1,53 @@
+<p>
+	<strong>Title: </strong>
+	<%= @title %>
+</p>
+
+<p>
+	<strong>Description: </strong>
+	<%= @description %>
+</p>
+
+<p>
+	<strong>Url: </strong>
+	<%= @url %>
+</p>
+
+<p>
+	<strong>Phone: </strong>
+	<%= @phone %>
+</p>
+
+<p>
+	<strong>Quantity: </strong>
+	<%= @quantity %>
+</p>
+
+<p>
+	<strong>FloatNumber: </strong>
+	<%= @float_number %>
+</p>
+
+<p>
+	<strong>DecimalNumber: </strong>
+	<%= @decimal_number %>
+</p>
+
+<p>
+	<strong>Full: </strong>
+	<%= @full %>
+</p>
+
+<p>
+	<strong>Email: </strong>
+	<%= @email %>
+</p>
+
+<p>
+	<strong>Password: </strong>
+	<%= @password %>
+</p>
+
+<p><a href="/posts/<%= @id %>/edit" class="post-edit">Edit</a></p>
+<p><a href="" class="post-delete">Delete</a></p>
+<p><a href="/posts">Back</a></p>

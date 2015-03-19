@@ -1,0 +1,6 @@
+<h1>Editing post</h1>
+
+<%- @render_partial 'posts/form' %>
+
+<a href="" class="post-save">Save</a>
+<a href="/posts">Back</a>

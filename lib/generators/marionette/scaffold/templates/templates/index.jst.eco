@@ -1,0 +1,26 @@
+<h1>Listing posts</h1>
+
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Url</th>
+      <th>Phone</th>
+      <th>Quantity</th>
+      <th>Float number</th>
+      <th>Decimal number</th>
+      <th>Full</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  </tbody>
+</table>
+
+<br>
+
+<a href="/posts/new" class="post-new">New Post</a>
