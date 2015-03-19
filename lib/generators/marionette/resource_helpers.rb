@@ -21,14 +21,6 @@ module Marionette
       "#{default_controller}##{default_action}"
     end
 
-    def module_name_class
-      file_name.camelize + 'App'
-    end
-
-    def module_name_underscore
-      file_name.underscore
-    end
-
     def embed_file(source, indent = '')
       IO.read(File.join(self.class.source_root, source)).gsub(/^/, indent)
     end
