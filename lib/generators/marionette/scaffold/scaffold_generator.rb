@@ -30,8 +30,8 @@ class Marionette::ScaffoldGenerator < Rails::Generators::Base
     generate "marionette:model #{@one.camelcase} #{@schema.map {|a| "#{a[0]}:#{a[1]}"}.join(' ')}"
 
     generate "marionette:view #{@many.underscore}/_empty ItemView"
-    template 'templates/_empty.jst.eco', "#{javascript_path}/backbone/app/templates/#{@many.underscore}/_empty.jst.eco", force: true
+    template 'templates/_empty.jst.eco', "#{backbone_path}/app/templates/#{@many.underscore}/_empty.jst.eco", force: true
     generate "marionette:view #{@many.underscore}/_post ItemView"
-    template 'templates/_post.jst.eco', "#{javascript_path}/backbone/app/templates/#{@many.underscore}/_post.jst.eco", force: true
+    template 'templates/_post.jst.eco', "#{backbone_path}/app/templates/#{@many.underscore}/_post.jst.eco", force: true
   end
 end

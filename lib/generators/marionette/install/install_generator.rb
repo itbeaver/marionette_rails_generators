@@ -39,18 +39,18 @@ class Marionette::InstallGenerator < Rails::Generators::Base
   end
 
   def create_dir_layout
-    empty_directory "#{javascript_path}/backbone"
-    %w(base config app).each { |dir| empty_directory "#{javascript_path}/backbone/#{dir}" }
-    %w(controllers models views).each { |dir| empty_directory "#{javascript_path}/backbone/base/#{dir}" }
-    %w(controllers models views).each { |dir| empty_directory "#{javascript_path}/backbone/config/#{dir}" }
-    %w(templates views models controllers).each { |dir| empty_directory "#{javascript_path}/backbone/app/#{dir}" }
+    empty_directory "#{backbone_path}"
+    %w(base config app).each { |dir| empty_directory "#{backbone_path}/#{dir}" }
+    %w(controllers models views).each { |dir| empty_directory "#{backbone_path}/base/#{dir}" }
+    %w(controllers models views).each { |dir| empty_directory "#{backbone_path}/config/#{dir}" }
+    %w(templates views models controllers).each { |dir| empty_directory "#{backbone_path}/app/#{dir}" }
   end
 
   def create_app_file
-    template 'app.js.coffee', "#{javascript_path}/backbone/app.js.coffee"
-    template 'after_backbone.js.coffee', "#{javascript_path}/backbone/after_backbone.js.coffee"
-    template 'before_backbone.js.coffee', "#{javascript_path}/backbone/before_backbone.js.coffee"
-    template 'routes.js.coffee', "#{javascript_path}/backbone/routes.js.coffee"
+    template 'app.js.coffee', "#{backbone_path}/app.js.coffee"
+    template 'after_backbone.js.coffee', "#{backbone_path}/after_backbone.js.coffee"
+    template 'before_backbone.js.coffee', "#{backbone_path}/before_backbone.js.coffee"
+    template 'routes.js.coffee', "#{backbone_path}/routes.js.coffee"
   end
 
   def start_marionette_app
@@ -62,11 +62,11 @@ class Marionette::InstallGenerator < Rails::Generators::Base
   end
 
   def copy_base
-    directory 'base', "#{javascript_path}/backbone/base/"
+    directory 'base', "#{backbone_path}/base/"
   end
 
   def copy_config
-    directory 'config', "#{javascript_path}/backbone/config/"
+    directory 'config', "#{backbone_path}/config/"
   end
 
   def add_routes
@@ -80,12 +80,12 @@ class Marionette::InstallGenerator < Rails::Generators::Base
 
   def root_page
     generate 'marionette:controller root index --with-views'
-    if File.exist? "#{javascript_path}/backbone/routes.js.coffee"
-      inject_into_file "#{javascript_path}/backbone/routes.js.coffee", after: "console.log 'Hello world!'\n" do <<-'COFFEE'
+    if File.exist? "#{backbone_path}/routes.js.coffee"
+      inject_into_file "#{backbone_path}/routes.js.coffee", after: "console.log 'Hello world!'\n" do <<-'COFFEE'
       new App.Controllers.All.Root(action: 'index')
       COFFEE
       end
     end
-    template 'app/templates/index.jst.eco', "#{javascript_path}/backbone/app/templates/root/index.jst.eco", force: true
+    template 'app/templates/index.jst.eco', "#{backbone_path}/app/templates/root/index.jst.eco", force: true
   end
 end

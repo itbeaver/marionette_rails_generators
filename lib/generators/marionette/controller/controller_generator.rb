@@ -32,13 +32,13 @@ class Marionette::ControllerGenerator < Rails::Generators::Base
     @with_views = options[:with_views]
     if @with_views
       template 'app/controllers/controller_with_views.js.coffee',
-               "#{javascript_path}/backbone/app/controllers/#{@title.underscore}_controller.js.coffee"
+               "#{backbone_path}/app/controllers/#{@title.underscore}_controller.js.coffee"
       @actions.each do |act|
         generate 'marionette:view', "#{@title}/#{act}", 'ItemView'
       end
     else
       template 'app/controllers/controller.js.coffee',
-             "#{javascript_path}/backbone/app/controllers/#{@title.underscore}_controller.js.coffee"
+             "#{backbone_path}/app/controllers/#{@title.underscore}_controller.js.coffee"
     end
   end
 end
