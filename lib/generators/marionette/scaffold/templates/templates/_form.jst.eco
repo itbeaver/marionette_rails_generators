@@ -1,52 +1,6 @@
 <form action="" method="post">
-  <div class="field">
-    <label for="title">Title</label>:
-    <input id="title" name="title" type="text" required /><br />
-  </div>
+  <%- @attributes.each do |a| -%>
+  <%= a.html %>
 
-  <div class="field">
-    <label for="description">Description</label><br>
-    <textarea id="description" name="description"></textarea>
-  </div>
-
-  <div class="field">
-    <label for="url">Url</label><br>
-    <input id="url" name="url" type="url">
-  </div>
-
-  <div class="field">
-    <label for="phone">Phone</label><br>
-    <input id="phone" name="phone" type="tel" required>
-  </div>
-
-  <div class="field">
-    <label for="quantity">Quantity</label><br>
-    <input id="quantity" name="quantity" type="number" required>
-  </div>
-
-  <div class="field">
-    <label for="float_number">Float number</label><br>
-    <input id="float_number" name="float_number" type="number" step="0.1" required>
-  </div>
-
-  <div class="field">
-    <label for="decimal_number">Decimal number</label><br>
-    <input id="decimal_number" name="decimal_number" type="number" step="0.1">
-  </div>
-
-  <div class="field">
-    <label for="full">Full</label><br>
-    <input name="full" type="hidden" value="0"><input id="full" name="full" type="checkbox" value="1">
-  </div>
-
-  <div class="field">
-    <label for="email">Email</label><br>
-    <input id="email" name="email" type="email">
-  </div>
-
-  <div class="field">
-    <label for="password">Password</label><br>
-    <input id="password" name="password" type="password" required>
-  </div>
-
+  <%- end -%>
 </form>

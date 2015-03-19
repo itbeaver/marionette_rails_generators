@@ -34,6 +34,13 @@ module Marionette
       string[0] == '_' ? string[1..-1] : string
     end
 
+    def controller_attr(file, type, attrs)
+      sentinel = /when '#{type.to_s}'$/
+      in_root do
+        inject_into_file "#{backbone_path}/app/controllers/#{file}.js.coffee", "\n          #{attrs}", { after: sentinel, verbose: false }
+      end
+    end
+
     def view_attr(file, attrs)
       sentinel = /extends.*$/
       in_root do

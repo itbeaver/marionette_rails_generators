@@ -1,14 +1,6 @@
-<td><%= @id %> </td>
-<td><%= @title %> </td>
-<td><%= @description %> </td>
-<td><%= @url %> </td>
-<td><%= @phone %> </td>
-<td><%= @quantity %> </td>
-<td><%= @float_number %> </td>
-<td><%= @decimal_number %> </td>
-<td><%= @full %> </td>
-<td><%= @email %> </td>
-<td><%= @password %> </td>
-<td><a href="/posts/<%= @id %>/" class="post-show">Show</a></td>
-<td><a href="/posts/<%= @id %>/edit/" class="post-edit">Edit</a></td>
-<td><a href="" class="post-delete">Delete</a> </td>
+<% @schema.each do |a| %>
+  <td><%%= @<%= a[0] %> %></td>
+<% end %>
+<td><a href="/<%= @many.underscore %>/<%%= @id %>/" class="<%= @one.underscore %>-show">Show</a></td>
+<td><a href="/<%= @many.underscore %>/<%%= @id %>/edit/" class="<%= @one.underscore %>-edit">Edit</a></td>
+<td><a href="" class="<%= @one.underscore %>-delete">Delete</a> </td>

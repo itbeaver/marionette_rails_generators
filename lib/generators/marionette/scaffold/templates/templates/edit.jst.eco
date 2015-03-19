@@ -1,6 +1,6 @@
-<h1>Editing post</h1>
+<h1>Editing <%= @one.underscore %></h1>
 
-<%- @render_partial 'posts/form' %>
+<%%- @render_partial '<%= @many.underscore %>/form' %>
 
-<a href="" class="post-save">Save</a>
-<a href="/posts">Back</a>
+<a href="" class="<%= @one.underscore %>-save">Save</a>
+<a href="/<%= @many.underscore %>">Back</a>

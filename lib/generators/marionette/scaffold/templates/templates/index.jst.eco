@@ -1,18 +1,11 @@
-<h1>Listing posts</h1>
+<h1>Listing <%= @many.underscore %></h1>
 
 <table cellspacing="0" cellpadding="0">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Url</th>
-      <th>Phone</th>
-      <th>Quantity</th>
-      <th>Float number</th>
-      <th>Decimal number</th>
-      <th>Full</th>
-      <th>Email</th>
-      <th>Password</th>
+    <%- @schema.each do |a| -%>
+      <td><%= a[0].camelcase %></td>
+    <%- end -%>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,4 +16,4 @@
 
 <br>
 
-<a href="/posts/new" class="post-new">New Post</a>
+<a href="/<%= @many.underscore %>/new" class="<%= @one.underscore %>-new">New <%= @one.camelcase %></a>
