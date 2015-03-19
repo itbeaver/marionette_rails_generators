@@ -34,6 +34,13 @@ module Marionette
       string[0] == '_' ? string[1..-1] : string
     end
 
+    def view_attr(file, attrs)
+      sentinel = /extends.*$/
+      in_root do
+        inject_into_file "#{backbone_path}/app/views/#{file}.js.coffee", "\n#{attrs}", { after: sentinel, verbose: false }
+      end
+    end
+
     def marionette_route(routing_code, type, modul='All')
       log :marionette_route, routing_code
       sentinel = /appRoutes\:\s*$/
