@@ -37,7 +37,7 @@ module Marionette
     def controller_attr(file, type, attrs)
       sentinel = /when '#{type.to_s}'$/
       in_root do
-        inject_into_file "#{backbone_path}/app/controllers/#{file}.js.coffee", "\n          #{attrs}", { after: sentinel, verbose: false }
+        inject_into_file "#{backbone_path}/app/controllers/#{file}.js.coffee", "          #{attrs}", { after: sentinel, verbose: false }
       end
     end
 
@@ -49,7 +49,6 @@ module Marionette
     end
 
     def marionette_route(routing_code, type, modul='All')
-      log :marionette_route, routing_code
       sentinel = /appRoutes\:\s*$/
 
       route = routing_code
@@ -64,6 +63,8 @@ module Marionette
       when :edit
         route = "    \"#{routing_code}/:id/edit(/)\": \"#{routing_code}_edit\""
       end
+
+      log :marionette_route, route
 
       in_root do
         inject_into_file "#{backbone_path}/routes.js.coffee", "\n  #{route}", { after: sentinel, verbose: false }

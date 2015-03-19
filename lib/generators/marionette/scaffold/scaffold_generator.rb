@@ -15,7 +15,8 @@ class Marionette::ScaffoldGenerator < Rails::Generators::Base
 
   argument :title, type: :string, required: true, banner: 'Entity'
   argument :schema, type: :hash, default: {}, banner: 'title:string description:text'
-
+  class_option :rails, type: :boolean, default: false,
+                             desc: 'Generate same rails scaffold'
   def vars
     @module = 'All'
     if @title =~ /\//
@@ -23,6 +24,7 @@ class Marionette::ScaffoldGenerator < Rails::Generators::Base
       @title = parse[2]
       @module = parse[1]
     end
+    @rails = options[:rails]
     @one = @title.singularize
     @many = @title.pluralize
     @attributes = []
@@ -121,14 +123,14 @@ class Marionette::ScaffoldGenerator < Rails::Generators::Base
           #{@many.underscore} = new App.Entities.All.#{@one.camelcase}Collection
           #{@many.underscore}.fetch
             reset: true
-          @layout = new App.Views.ApplicationLayout
+          @layout = new App.Views.Layouts.ApplicationLayout
           @listenTo @layout, "show", =>
             indexView = new App.Views.#{@many.camelcase}.Index(collection: #{@many.underscore})
             @show indexView, region: @layout.bodyRegion, loading: true
           @show @layout, loading: false
 )
     controller_attr @many.underscore + '_controller', :new, %(
-          @layout = new App.Views.ApplicationLayout
+          @layout = new App.Views.Layouts.ApplicationLayout
           @listenTo @layout, "show", =>
             newView = new App.Views.#{@many.camelcase}.New
             @show newView, region: @layout.bodyRegion, loading: true
@@ -138,7 +140,7 @@ class Marionette::ScaffoldGenerator < Rails::Generators::Base
           #{@one.underscore} = new App.Entities.All.#{@one.camelcase} id: args.id
           #{@one.underscore}.fetch
             reset: true
-          @layout = new App.Views.ApplicationLayout
+          @layout = new App.Views.Layouts.ApplicationLayout
           @listenTo @layout, "show", =>
             showView = new App.Views.#{@many.camelcase}.Show(model: #{@one.underscore})
             @show showView, region: @layout.bodyRegion, loading: true
@@ -148,11 +150,26 @@ class Marionette::ScaffoldGenerator < Rails::Generators::Base
           #{@one.underscore} = new App.Entities.All.#{@one.camelcase} id: args.id
           #{@one.underscore}.fetch
             reset: true
-          @layout = new App.Views.ApplicationLayout
+          @layout = new App.Views.Layouts.ApplicationLayout
           @listenTo @layout, "show", =>
             editView = new App.Views.#{@many.camelcase}.Edit(model: #{@one.underscore})
             @show editView, region: @layout.bodyRegion, loading: true
           @show @layout, loading: false
 )
+    marionette_route(@many.underscore, :edit)
+    marionette_route(@many.underscore, :show)
+    marionette_route(@many.underscore, :new)
+    marionette_route(@many.underscore, :index)
+
+    if @rails
+      generate "scaffold #{@one.camelcase} #{@schema.map {|a| "#{a[0]}:#{a[1]}"}.join(' ')}"
+      gsub_file 'config/routes.rb', "resources :#{@many.underscore}" do |match|
+        %(
+  scope :api, constraints: { format: 'json' } do
+    resources :#{@many.underscore}
+  end
+        )
+      end
+    end
   end
 end
