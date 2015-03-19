@@ -1,6 +1,6 @@
 
 # :nodoc:
-class Marionette::Attribute < Rails::Generators::Base
+class Marionette::Attribute
   attr_accessor :column_name, :type, :field_type
 
   def initialize(name, type=nil)

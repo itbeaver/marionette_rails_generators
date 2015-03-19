@@ -1,5 +1,5 @@
 require 'generators/marionette/resource_helpers'
-require 'generators/marionette/view/attribute'
+require 'generators/marionette/attribute'
 
 # View generator
 #
