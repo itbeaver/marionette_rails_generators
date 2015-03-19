@@ -35,6 +35,6 @@ class Marionette::ModelGenerator < Rails::Generators::Base
 
   def generate_entity
     template 'app/models/entity.js.coffee',
-             "#{javascript_path}/backbone/app/models/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+             "#{backbone_path}/app/models/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
   end
 end

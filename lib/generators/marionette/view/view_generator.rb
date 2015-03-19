@@ -30,6 +30,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   argument :schema, type: :hash, default: {}, banner: 'title:string description:text'
   class_option :partial, type: :boolean, default: false,
                              desc: 'Generate partial template'
+  class_option 'without-template', type: :boolean, default: false, desc: 'generate without template'
   def vars
     @module = 'All'
     if @title =~ /\//
@@ -37,6 +38,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
       @title = parse[2]
       @module = parse[1]
     end
+    @withouttempl = options['without-template']
     @partial = options[:partial]
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
@@ -102,36 +104,36 @@ class Marionette::ViewGenerator < Rails::Generators::Base
     case type
     when 'layout', 'Layout'
       unless @partial
-        if File.exist?("#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee")
-          append_file "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", @layout.gsub(@begin_layout, '')
+        if File.exist?("#{backbone_path}/app/views/layouts/layouts.js.coffee")
+          append_file "#{backbone_path}/app/views/layouts/layouts.js.coffee", @layout.gsub(@begin_layout, '')
         else
-          create_file "#{javascript_path}/backbone/app/views/layouts/layouts.js.coffee", @layout
+          create_file "#{backbone_path}/app/views/layouts/layouts.js.coffee", @layout
         end
       end
       template 'app/templates/layouts/application.jst.eco',
-               "#{javascript_path}/backbone/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco"
+               "#{backbone_path}/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco" unless @withouttempl
     when 'item_view', 'ItemView', 'partial'
       @partial = true if type == 'partial'
       unless @partial
         template 'app/views/item_view.js.coffee',
-                 "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+                 "#{backbone_path}/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
       end
       template 'app/templates/item_view.jst.eco',
-               "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
+               "#{backbone_path}/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco" unless @withouttempl
     when 'collection_view', 'CollectionView'
       unless @partial
         template 'app/views/collection_view.js.coffee',
-                 "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+                 "#{backbone_path}/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
       end
       template 'app/templates/collection_view.jst.eco',
-               "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
+               "#{backbone_path}/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco" unless @withouttempl
     when 'composite_view', 'CompositeView'
       unless @partial
         template 'app/views/composite_view.js.coffee',
-                 "#{javascript_path}/backbone/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
+                 "#{backbone_path}/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
       end
       template 'app/templates/composite_view.jst.eco',
-               "#{javascript_path}/backbone/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco"
+               "#{backbone_path}/app/templates/#{ @module.underscore }/#{ @titletemplate.underscore }.jst.eco" unless @withouttempl
     else
       puts "Type [#{type}] didn't supported. Feel free to submit issue https://github.com/itbeaver/marionette_rails_generators/issues"
     end

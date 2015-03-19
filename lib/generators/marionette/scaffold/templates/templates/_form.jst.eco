@@ -1,0 +1,6 @@
+<form action="" method="post">
+  <%- @attributes.each do |a| -%>
+  <%= a.html %>
+
+  <%- end -%>
+</form>
