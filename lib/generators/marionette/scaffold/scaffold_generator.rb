@@ -1,22 +1,41 @@
 require 'generators/marionette/resource_helpers'
 require 'generators/marionette/attribute'
 
-# Scaffold generator
-#
-# Example:
-#
+# :nodoc:
 class Marionette::ScaffoldGenerator < Rails::Generators::Base
   include Marionette::ResourceHelpers
-  desc %(
-    pending
+  desc %(Description:
+    Scaffolds an entire resource, from model to controller and
+    views. The resource is ready to use as a
+    starting point for your RESTful, resource-oriented application.
+
+    Pass the name of the model (in singular form), either CamelCased or
+    under_scored, as the first argument, and an optional list of attribute
+    pairs.
+
+    Attributes are field arguments specifying the model's attributes. For instance:
+    'title:string body:text tracking_id:integer' will generate a title field of
+    string type, a body with text type and a tracking_id as an integer.
+
+    You don't have to think up every attribute up front, but it helps to
+    sketch out a few so you can start working with the resource immediately.
+
+    For example, 'scaffold post title body:text published:boolean' gives
+    you a model with those three attributes, a controller that handles
+    the create/show/update/destroy, forms to create and edit your posts, and
+    an index that lists them all, as well as a resources :posts declaration
+    in routes.js.coffee.
+
+Examples:
+    `rails generate marionette:scaffold post title:string body:text published:boolean`
   )
 
   source_root File.expand_path('../templates', __FILE__)
 
-  argument :title, type: :string, required: true, banner: 'Entity'
+  argument :title, type: :string, required: true, banner: 'Title'
   argument :schema, type: :hash, default: {}, banner: 'title:string description:text'
   class_option :rails, type: :boolean, default: false,
-                             desc: 'Generate same rails scaffold'
+                             desc: 'also run (rails generate scaffold Title [title:string description:text]) and wrap resource route to "/api" scope'
   def vars
     @module = 'All'
     if @title =~ /\//
