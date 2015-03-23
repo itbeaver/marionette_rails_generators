@@ -18,9 +18,30 @@ And then execute:
     $ bundle
 
 Backbone(1.1.2) and Marionette(2.4.1) are loaded from the gem 'backbone-rails' and gem 'marionette-rails' accordingly.
-To install backbone-marionette app execute
+To install backbone-marionette app, execute:
 ```ruby
 rails generate marionette:install
+```
+
+So now in your `application.js` you can see:
+
+```
+//= require jquery.spin
+//= require underscore
+//= require backbone
+//= require backbone.marionette
+//= require backbone-syphon						// For forms serialize and deserialize
+
+//= require ./backbone/before_backbone
+//= require ./backbone/app 						// App initializer
+//= require_tree ./backbone/base 				// Base views, controller, entity, entitycollection
+//= require_tree ./backbone/config				// Configuration (sync method, helper controllers, views and entities)
+//= require_tree ./backbone/app/templates		// jst.eco templates
+//= require_tree ./backbone/app/views			// View class
+//= require_tree ./backbone/app/models			// Entities
+//= require_tree ./backbone/app/controllers		// Controllers
+//= require ./backbone/routes					// navigate to controller#action (initialize controller with specified action)
+//= require ./backbone/after_backbone
 ```
 
 ## Usage
