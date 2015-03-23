@@ -28,10 +28,15 @@ rails generate marionette:install
 After install, start server, at the root you will see welcome page.
 
 You can use these generators:
+
 `rails generate marionette:scaffold Title [title:string description:text] [options]`
+
 `rails generate marionette:model Title [title:string description:text] [options]`
+
 `rails generate marionette:view Title Type [title:string description:text] [options]`
+
 `rails generate marionette:controller Title [action action] [options]`
+
 For more information about command run it in console
 
 ## Contributing
