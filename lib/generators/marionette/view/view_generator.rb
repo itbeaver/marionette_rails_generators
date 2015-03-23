@@ -31,6 +31,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   class_option :partial, type: :boolean, default: false,
                              desc: 'Generate partial template'
   class_option 'without-template', type: :boolean, default: false, desc: 'generate without template'
+
   def vars
     @module = 'All'
     if @title =~ /\//
@@ -42,50 +43,9 @@ class Marionette::ViewGenerator < Rails::Generators::Base
     @partial = options[:partial]
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
-  end
-
-  def protect_against_forgery?
-    false
-  end
-
-  def schema_form_generate
     @attributes = []
     @schema.each do |a|
       @attributes << Marionette::Attribute.new(a[0], a[1])
-    end
-    capture do
-      @form = form_tag '' do
-        @attributes.each do |attribute|
-          concat "\n\n"
-          concat '<div class="field">'.html_safe
-          concat "\n"
-          if attribute.password_digest?
-            concat label_tag :password
-            concat '<br>'.html_safe
-            concat "\n"
-            concat password_field_tag :password
-            concat "\n\n"
-            concat label_tag :password_confirmation
-            concat '<br>'.html_safe
-            concat "\n"
-            concat password_field_tag :password_confirmation
-          else
-            concat label_tag(attribute.column_name.to_sym)
-            concat '<br>'.html_safe
-            concat "\n"
-            concat eval("#{attribute.field_type.to_s}_tag(:#{attribute.column_name})")
-          end
-          concat "\n"
-          concat '</div>'.html_safe
-        end
-        concat "\n\n"
-        concat '<div class="actions">'.html_safe
-        concat "\n"
-        concat submit_tag
-        concat "\n"
-        concat '</div>'.html_safe
-        concat "\n\n"
-      end
     end
   end
 

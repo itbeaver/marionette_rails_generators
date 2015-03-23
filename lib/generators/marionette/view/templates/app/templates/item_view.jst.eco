@@ -1,5 +1,10 @@
 <%- if @attributes.blank? -%>
 <p>Find me in app/templates/<%= @module.underscore %>/<%= @titletemplate.underscore %>.jst.eco</p>
 <%- else -%>
-<%= @form %>
+<form action="" method="post">
+  <%- @attributes.each do |a| -%>
+  <%= a.html %>
+
+  <%- end -%>
+</form>
 <%- end -%>
