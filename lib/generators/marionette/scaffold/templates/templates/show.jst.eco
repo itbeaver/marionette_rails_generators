@@ -1,0 +1,10 @@
+<% @schema.each do |a| %>
+  <p>
+	<strong><%= a[0].camelcase %>: </strong>
+	<%%= @<%= a[0] %> %>
+  </p>
+<% end %>
+
+<p><a href="/<%= @many.underscore %>/<%%= @id %>/edit" class="<%= @one.underscore %>-edit">Edit</a></p>
+<p><a href="" class="<%= @one.underscore %>-delete">Delete</a></p>
+<a href="/<%= @many.underscore %>">Back</a>

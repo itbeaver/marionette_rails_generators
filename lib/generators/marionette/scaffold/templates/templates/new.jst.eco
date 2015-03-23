@@ -1,0 +1,6 @@
+<h1>New <%= @one.underscore %></h1>
+
+<%%- @render_partial '<%= @many.underscore %>/form' %>
+
+<a href="" class="<%= @one.underscore %>-create">Save</a>
+<a href="/<%= @many.underscore %>">Back</a>

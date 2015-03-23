@@ -1,0 +1,6 @@
+<% @schema.each do |a| %>
+  <td><%%= @<%= a[0] %> %></td>
+<% end %>
+<td><a href="/<%= @many.underscore %>/<%%= @id %>/" class="<%= @one.underscore %>-show">Show</a></td>
+<td><a href="/<%= @many.underscore %>/<%%= @id %>/edit/" class="<%= @one.underscore %>-edit">Edit</a></td>
+<td><a href="" class="<%= @one.underscore %>-delete">Delete</a> </td>

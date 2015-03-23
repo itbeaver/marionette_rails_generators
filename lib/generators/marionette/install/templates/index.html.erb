@@ -1,0 +1,9 @@
+<div id="main-region"></div>
+
+<%%= javascript_tag do %>
+  $(function() {
+    Backbone.app.start({
+      environment: '<%%= ::Rails.env %>'
+    });
+  });
+<%% end %>
