@@ -47,7 +47,7 @@
     background-position: top left;
     height: 64px;
   }
-  #header h1, #header h2 {margin: 0}
+  #header h1, #header h2 {margin: 0; margin-bottom: 15px;}
   #header h2 {
     color: #888;
     font-weight: normal;
@@ -84,25 +84,6 @@
     font-size: 18px;
     color: #333;
   }
-  #getting-started li p {
-    color: #555;
-    font-size: 13px;
-  }
-  ul {
-    margin-left: 0;
-    padding-left: 0;
-  }
-  ul li {
-    list-style-type: disc;
-    margin-bottom: 5px !important;
-    font-size: 13px !important;
-    color: #000 !important;
-  }
-  .filename {
-    font-size: 12px;
-    font-style: italic;
-    color: #782b33;
-  }
 </style>
 
 <div id="page">
@@ -110,49 +91,24 @@
   <div id="content">
     <div id="header">
       <h1>Welcome aboard</h1>
-      <h2>You&rsquo;re riding Ruby on Rails with Bacbone on Marionette! </h2>
-      <h2>Guidance on the use of the <a href='https://github.com/itbeaver/marionette_rails_generators' target="_blank">MarionetteRailsGenerators</a> </h2>
+      <h2>You&rsquo;re riding Ruby on Rails with <a href='https://github.com/itbeaver/marionette_rails_generators' target="_blank">MarionetteRailsGenerators</a>!</h2>
     </div>
 
     <div id="getting-started">
       <h1>Here&rsquo;s available generators:</h1>
-
+      <p>To get more information about command run it in console</p>
       <ol>
         <li>
-          <h2><code>rails g marionette:controller TITLE [ACTION ACTION ACTION] --with-views</code></h2>
-          <p>Creates TitleController with ACTIONS</p>
-          <p>Option with-views generates additional Title.ActionView ItemView for every action. Controller actions renders corresponding views</p>
-          <p>Defaults:</p>
-          <ul>
-            <li>actions: 'index', 'new', 'show', 'edit'</li>
-            <li>with-views = false</li>
-          </ul>
+          <h2><code>rails generate marionette:scaffold</code></h2>
         </li>
         <li>
-          <h2><code>rails g marionette:view TITLE TYPE --partial</code></h2>
-          <p>Creates [Module].[Title] [Type] at <span class="filename">../backbone/app/views/[module]/[title].js.coffee</span></p>
-          <p>Creates JST template at <span class="filename">../backbone/app/views/[module]/[title].js.coffee</span></p>
-          <p>If [Type] is 'Layout', module will be 'layouts' and can't be changed</p>
-          <p>Available types:</p>
-          <ul>
-            <li>layout generates Layout</li>
-            <li>item_view generates ItemView</li>
-            <li>collection_view generates CollectionView</li>
-            <li>composite_view generates CompositeView</li>
-          </ul>
-          <p>Defaults:</p>
-          <ul>
-            <li>module = 'All'</li>
-            <li>partial = false</li>
-          </ul>
+          <h2><code>rails generate marionette:controller</code></h2>
         </li>
         <li>
-          <h2><code>rails g marionette:model ENTITY [title:string description:text]</code></h2>
-          <p>Creates [Entity] Entities.Model and [Entity]Collection Entities.Collection at <span class="filename">../backbone/app/models/[entity].js.coffee</span></p>
-          <p>Defaults:</p>
-          <ul>
-            <li>schema = {}</li>
-          </ul>
+          <h2><code>rails generate marionette:view</code></h2>
+        </li>
+        <li>
+          <h2><code>rails generate marionette:model</code></h2>
         </li>
       </ol>
     </div>

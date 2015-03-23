@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Russkikh Artem"]
   spec.email         = ["russkikhartem@itbeaver.co"]
   spec.summary       = %q{Backbone on Marionette. Rails generators}
-  spec.description   = %q{Backbone on Marionette. Rails generators. Made to work with API}
+  spec.description   = %q{Backbone on Marionette. Rails generators}
   spec.homepage      = "http://itbeaver.co"
   spec.license       = "MIT"
 
@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'backbone-rails', '~> 1.1.2'
-  spec.add_runtime_dependency 'marionette-rails', '~> 2.3.2'
-  spec.add_runtime_dependency 'eco'
+  spec.add_runtime_dependency 'marionette-rails', '~> 2.4.1'
+  spec.add_runtime_dependency 'eco', '~> 1.0.0'
 
   spec.add_development_dependency "rails"
   spec.add_development_dependency "pry"

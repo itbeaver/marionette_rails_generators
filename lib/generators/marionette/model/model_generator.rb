@@ -1,22 +1,24 @@
 require 'generators/marionette/resource_helpers'
 
-# Model generator
-#
-# Example:
-#
-#   rails g marionette:model Post title:string description:text
+# :nodoc:
 class Marionette::ModelGenerator < Rails::Generators::Base
   include Marionette::ResourceHelpers
-  desc %(
-  	Creates entity [Title] with schema [schema] and [Title]Collection associated with entity
-    Module will be parsed from title
+  desc %(Description:
+    Stubs out a new model - Entity class and EntityCollection class.
+    Pass the model name, either CamelCased or
+    under_scored, and an optional list of attribute pairs as arguments.
+
+    Optional list of attribute pairs can be represented as
+    javascript object with 'schema' method.
+
+    Attribute pairs are field:type arguments specifying the
+    model's attributes.
 
     Example:
-
-      rails g marionette:entity posts title:string description:text
-        Entity => 'Backbone.app.Entities.All.Posts'
-      rails g marionette:entity blogs/posts
-        Entity => 'Backbone.app.Entities.Blogs.Posts'
+      rails g marionette:entity post title:string description:text
+        generates entity 'Backbone.app.Entities.All.Post'
+      rails g marionette:entity blogs/post
+        generates entity 'Backbone.app.Entities.Blogs.Post'
   )
 
   source_root File.expand_path('../templates', __FILE__)

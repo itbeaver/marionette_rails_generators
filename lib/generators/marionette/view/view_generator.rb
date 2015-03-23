@@ -1,26 +1,39 @@
 require 'generators/marionette/resource_helpers'
 require 'generators/marionette/attribute'
 
-# View generator
-#
-# Example:
-#
-#   rails g marionette:view layout application
+# :nodoc:
 class Marionette::ViewGenerator < Rails::Generators::Base
   include Marionette::ResourceHelpers
   include ActionView::Helpers::FormTagHelper
-  desc %(
-    Creates view. Type values: [partial, Layout, ItemView, CollectionView, CompositeView].
-    Module will be parsed from title
+  desc %(Description:
+    Stubs out a new view. Pass the view name, either
+    CamelCased or under_scored, and a type of view as argument.
 
-    Example:
+    Pass an optional list of attribute pairs as arguments for
+    filling template with form.
 
-      rails g marionette:view index ItemView title:string description:text
-        View => 'Backbone.app.Views.All.Index'
-      rails g marionette:view posts/index ItemView title:string description:text
-        View => 'Backbone.app.Views.Posts.Index'
-      rails g marionette:view blogs/posts/index ItemView title:string description:text
-        View => 'Backbone.app.Views.Blogs.Posts.Index'
+    To create a view within a module, specify the view name as a
+    path like 'parent_module/view_name'.
+
+    This generates a view class in app/assets/javascripts/backbone/app/views
+    and template in app/assets/javascripts/backbone/app/templates folder.
+
+    Type may take the following values: partial, Layout,
+    ItemView, CollectionView, CompositeView
+
+    Layouts views appends to
+      app/assets/javascripts/backbone/app/views/layouts/layouts.js.coffee
+
+Example:
+    rails g marionette:view index ItemView title:string description:text
+      generates ItemView 'Backbone.app.Views.All.Index'
+      and template filled with form
+    rails g marionette:view posts/index ItemView title:string description:text
+      generates ItemView 'Backbone.app.Views.Posts.Index'
+      and template filled with form
+    rails g marionette:view blogs/posts/index ItemView
+      generates ItemView 'Backbone.app.Views.Blogs.Posts.Index'
+      and stub template
   )
 
   source_root File.expand_path('../templates', __FILE__)
@@ -28,9 +41,7 @@ class Marionette::ViewGenerator < Rails::Generators::Base
   argument :title, type: :string
   argument :type, type: :string
   argument :schema, type: :hash, default: {}, banner: 'title:string description:text'
-  class_option :partial, type: :boolean, default: false,
-                             desc: 'Generate partial template'
-  class_option 'without-template', type: :boolean, default: false, desc: 'generate without template'
+  class_option 'without-template', type: :boolean, default: false, desc: 'generate View without template'
 
   def vars
     @module = 'All'
@@ -40,7 +51,8 @@ class Marionette::ViewGenerator < Rails::Generators::Base
       @module = parse[1]
     end
     @withouttempl = options['without-template']
-    @partial = options[:partial]
+    @partial = false
+    @partial = true if type == 'partial'
     @titletemplate = @title
     @titletemplate = '_' + @titletemplate if @partial
     @attributes = []
@@ -73,7 +85,6 @@ class Marionette::ViewGenerator < Rails::Generators::Base
       template 'app/templates/layouts/application.jst.eco',
                "#{backbone_path}/app/templates/layouts/#{ @titletemplate.underscore }.jst.eco" unless @withouttempl
     when 'item_view', 'ItemView', 'partial'
-      @partial = true if type == 'partial'
       unless @partial
         template 'app/views/item_view.js.coffee',
                  "#{backbone_path}/app/views/#{ @module.underscore }/#{ @title.underscore }.js.coffee"
