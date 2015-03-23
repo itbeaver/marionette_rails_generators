@@ -182,7 +182,7 @@ Examples:
 
     if @rails
       generate "scaffold #{@one.camelcase} #{@schema.map {|a| "#{a[0]}:#{a[1]}"}.join(' ')}"
-      gsub_file 'config/routes.rb', "resources :#{@many.underscore}" do |match|
+      gsub_file 'config/routes.rb', "\n  resources :#{@many.underscore}" do |match|
         %(
   scope :api, constraints: { format: 'json' } do
     resources :#{@many.underscore}
