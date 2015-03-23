@@ -138,7 +138,7 @@ Examples:
     template 'templates/show.jst.eco', "#{backbone_path}/app/templates/#{@many.underscore}/show.jst.eco"
 
     generate "marionette:controller #{@many.underscore}"
-    controller_attr @module.underscore + @many.underscore + '_controller', :index, %(
+    controller_attr @module.underscore + '/' + @many.underscore + '_controller', :index, %(
           #{@many.underscore} = new App.Entities.All.#{@one.camelcase}Collection
           #{@many.underscore}.fetch
             reset: true
@@ -148,14 +148,14 @@ Examples:
             @show indexView, region: @layout.bodyRegion, loading: true
           @show @layout, loading: false
 )
-    controller_attr @module.underscore + @many.underscore + '_controller', :new, %(
+    controller_attr @module.underscore + '/' + @many.underscore + '_controller', :new, %(
           @layout = new App.Views.Layouts.ApplicationLayout
           @listenTo @layout, "show", =>
             newView = new App.Views.#{@many.camelcase}.New
             @show newView, region: @layout.bodyRegion, loading: true
           @show @layout, loading: false
 )
-    controller_attr @module.underscore + @many.underscore + '_controller', :show, %(
+    controller_attr @module.underscore + '/' + @many.underscore + '_controller', :show, %(
           #{@one.underscore} = new App.Entities.All.#{@one.camelcase} id: args.id
           #{@one.underscore}.fetch
             reset: true
@@ -165,7 +165,7 @@ Examples:
             @show showView, region: @layout.bodyRegion, loading: true
           @show @layout, loading: false
 )
-    controller_attr @module.underscore + @many.underscore + '_controller', :edit, %(
+    controller_attr @module.underscore + '/' + @many.underscore + '_controller', :edit, %(
           #{@one.underscore} = new App.Entities.All.#{@one.camelcase} id: args.id
           #{@one.underscore}.fetch
             reset: true
